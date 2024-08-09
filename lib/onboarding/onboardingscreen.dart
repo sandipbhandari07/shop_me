@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wucommerce/colors/appcolors.dart';
 import 'package:wucommerce/screens/welcomeback_screen.dart';
-import 'package:wucommerce/screens/welcomeback_screen.dart';
 
 class Onboardingscreen extends StatefulWidget {
   const Onboardingscreen({super.key});
@@ -37,63 +36,66 @@ class _OnboardingscreenState extends State<Onboardingscreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: _getPageColor(_pageIndex),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  if (_pageIndex != onboard_data.length - 1)
-                    TextButton(
-                      onPressed: () {
-                        _pageController.animateToPage(
-                          onboard_data.length - 1,
-                          duration: const Duration(milliseconds: 300),
-                          curve: Curves.ease,
-                        );
-                      },
-                      child: Text(
-                        "Skip",
-                        style: TextStyle(
-                            color: _getPageColor(_pageIndex),
-                            fontFamily: 'RobotoMono'),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                if (_pageIndex != onboard_data.length - 1)
+                  TextButton(
+                    onPressed: () {
+                      _pageController.animateToPage(
+                        onboard_data.length - 1,
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.ease,
+                      );
+                    },
+                    child: const Text(
+                      "Skip",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'RobotoMono',
                       ),
                     ),
-                ],
+                  ),
+              ],
+            ),
+            Expanded(
+              child: PageView.builder(
+                itemCount: onboard_data.length,
+                controller: _pageController,
+                onPageChanged: (index) {
+                  setState(() {
+                    _pageIndex = index;
+                  });
+                },
+                itemBuilder: (context, index) => OnBoardContent(
+                  image: onboard_data[index].image,
+                  title: onboard_data[index].title,
+                  description: onboard_data[index].description,
+                ),
+                //clampingscrollphysics no bouncing effect when scrolling between pages
+                physics: ClampingScrollPhysics(),
               ),
-              Expanded(
-                child: PageView.builder(
-                  itemCount: onboard_data.length,
-                  controller: _pageController,
-                  onPageChanged: (index) {
-                    setState(() {
-                      _pageIndex = index;
-                    });
-                  },
-                  itemBuilder: (context, index) => OnBoardContent(
-                    image: onboard_data[index].image,
-                    title: onboard_data[index].title,
-                    description: onboard_data[index].description,
-                    color: _getPageColor(index),
+            ),
+            Row(
+              children: [
+                ...List.generate(
+                  onboard_data.length,
+                      (index) => Padding(
+                        padding: const EdgeInsets.only(left: 16.0, bottom: 20.0), // Increased padding
+                    child: DotIndicator(
+                      isActive: index == _pageIndex,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
-              ),
-              Row(
-                children: [
-                  ...List.generate(
-                    onboard_data.length,
-                    (index) => Padding(
-                      padding: const EdgeInsets.only(right: 4),
-                      child: DotIndicator(
-                        isActive: index == _pageIndex,
-                        color: _getPageColor(_pageIndex),
-                      ),
-                    ),
-                  ),
-                  const Spacer(),
-                  SizedBox(
+                const Spacer(),
+                Padding(
+                  padding: const EdgeInsets.only(right: 16.0, bottom: 20.0), // Moved arrow upward
+                  child: SizedBox(
                     height: 60,
                     width: 60,
                     child: ElevatedButton(
@@ -109,19 +111,18 @@ class _OnboardingscreenState extends State<Onboardingscreen> {
                       },
                       style: ElevatedButton.styleFrom(
                         shape: const CircleBorder(),
-                        backgroundColor:
-                            _getPageColor(_pageIndex), // Button color
+                        backgroundColor: Colors.white,
                       ),
                       child: SvgPicture.asset(
                         "assets/icons/arrow.svg",
-                        color: Colors.white,
+                        color: _getPageColor(_pageIndex),
                       ),
                     ),
                   ),
-                ],
-              )
-            ],
-          ),
+                ),
+              ],
+            )
+          ],
         ),
       ),
     );
@@ -153,13 +154,16 @@ class DotIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 300),
-      height: isActive ? 12 : 4,
-      width: 4,
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: const BorderRadius.all(Radius.circular(12)),
+    return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 1.0),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        height: isActive ? 12 : 4,
+        width: 4,
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: const BorderRadius.all(Radius.circular(12)),
+        ),
       ),
     );
   }
@@ -180,19 +184,19 @@ final List<Onboard> onboard_data = [
     image: "assets/images/markets.png",
     title: "Search Products",
     description:
-        "High-quality product designed to enhance your daily healthy life with ease and efficiency.",
+    "High-quality product designed to enhance your daily healthy life with ease and efficiency.",
   ),
   Onboard(
     image: "assets/images/carts.png",
     title: "Add to Cart",
     description:
-        "Add to Cart for a premium product that combines quality, convenience and unbeatable performance.",
+    "Add to Cart for a premium product that combines quality, convenience and unbeatable performance.",
   ),
   Onboard(
     image: "assets/images/payments.png",
     title: "Secure Payment",
     description:
-        "Secure your purchase with fast, reliable payment options for a seamless checkout experience.",
+    "Secure your purchase with fast, reliable payment options for a seamless checkout experience.",
   ),
 ];
 
@@ -202,20 +206,20 @@ class OnBoardContent extends StatelessWidget {
     required this.image,
     required this.title,
     required this.description,
-    required this.color,
   }) : super(key: key);
 
   final String image, title, description;
-  final Color color;
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         const Spacer(),
         Image.asset(
           image,
           height: 250,
+          fit: BoxFit.contain,
         ),
         const Spacer(),
         Text(
@@ -223,14 +227,20 @@ class OnBoardContent extends StatelessWidget {
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.headlineMedium!.copyWith(
               fontWeight: FontWeight.w100,
-              color: color,
+              color: Colors.white,
               fontFamily: 'MontseBold'),
         ),
-        SizedBox(height: 10.0), // adjust the height as needed
-        Text(
-          description,
-          textAlign: TextAlign.center,
-          style: TextStyle(color: color, fontFamily: 'Montse'),
+        SizedBox(height: 10.0),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0), // Added padding to description
+          child: Text(
+            description,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              color: Colors.white,
+              fontFamily: 'Montse',
+            ),
+          ),
         ),
         const Spacer(),
       ],
