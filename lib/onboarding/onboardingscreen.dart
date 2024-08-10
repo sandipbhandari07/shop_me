@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wucommerce/colors/appcolors.dart';
-import 'package:wucommerce/screens/welcomeback_screen.dart';
+import 'package:wucommerce/screens/homepage_screen.dart';
+
 
 class Onboardingscreen extends StatefulWidget {
+
   const Onboardingscreen({super.key});
 
   @override
@@ -11,6 +14,7 @@ class Onboardingscreen extends StatefulWidget {
 }
 
 class _OnboardingscreenState extends State<Onboardingscreen> {
+
   late PageController _pageController;
   int _pageIndex = 0;
 
@@ -29,12 +33,15 @@ class _OnboardingscreenState extends State<Onboardingscreen> {
   void navigateToNextScreen(BuildContext context) {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => WelcomebackScreen()),
+      MaterialPageRoute(builder: (context) => HomepageScreen()),
     );
   }
 
+
   @override
   Widget build(BuildContext context) {
+    // Hides the mobile navigation buttons and notification bar
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
     return Scaffold(
       backgroundColor: _getPageColor(_pageIndex),
       body: SafeArea(

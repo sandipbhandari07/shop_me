@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 import 'package:wucommerce/onboarding/onboardingscreen.dart';
+import 'package:wucommerce/signInandUp/loginpage_screen.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -16,7 +17,8 @@ class SplashScreen extends StatelessWidget {
       splash: Center(
         child: Lottie.asset('assets/animation/shop.json'),
       ),
-      nextScreen: const Onboardingscreen(),
+      nextScreen: //const
+       LoginPageScreen(),
       duration: 5000,
       splashIconSize: 200,
       backgroundColor: Colors.white,
