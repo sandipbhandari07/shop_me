@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wucommerce/colors/appcolors.dart';
 import 'package:wucommerce/signInandUp/loginpage_screen.dart';
 
 
@@ -37,6 +38,8 @@ class _RegisterPageScreenState extends State<RegisterPageScreen> {
                 style: TextStyle(
                   fontSize: 24.0,
                   fontWeight: FontWeight.bold,
+
+                    fontFamily: 'RobotoMono'
                 ),
               ),
             ),
@@ -94,6 +97,7 @@ class _RegisterPageScreenState extends State<RegisterPageScreen> {
                   child: Text(
                     "I agree to the Privacy Policy and Terms & Conditions of sHopMe.",
                     style: TextStyle(fontSize: 14.0),
+
                   ),
                 ),
               ],
@@ -105,7 +109,7 @@ class _RegisterPageScreenState extends State<RegisterPageScreen> {
               height: 50.0,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black, // Background color
+                  backgroundColor: AppColors.blue_blue, // Background color
                 ),
                 onPressed: _agreeToTerms
                     ? () {
@@ -117,6 +121,7 @@ class _RegisterPageScreenState extends State<RegisterPageScreen> {
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18.0,
+                      fontFamily: 'RobotoMono'
                   ),
                 ),
               ),
@@ -126,7 +131,11 @@ class _RegisterPageScreenState extends State<RegisterPageScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Already have an account? "),
+                Text("Already have an account? ",
+                style: TextStyle(
+                    fontFamily: 'RobotoMono',
+                ),
+                ),
                 GestureDetector(
                   onTap: () {
                     // Navigate to Login Page Screen
@@ -140,8 +149,9 @@ class _RegisterPageScreenState extends State<RegisterPageScreen> {
                   child: Text(
                     'Log in',
                     style: TextStyle(
-                      color: Colors.black,
+                      color: AppColors.blue_blue,
                       fontWeight: FontWeight.bold,
+                        fontFamily: 'RobotoMono'
                     ),
                   ),
                 ),

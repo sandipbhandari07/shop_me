@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wucommerce/colors/appcolors.dart';
 import 'package:wucommerce/signInandUp/forgotpassword_screen.dart';
 import 'package:wucommerce/signInandUp/registerpage_screen.dart';
 // Make sure this file exists and is properly configured.
@@ -24,10 +25,11 @@ class _LoginPageScreenState extends State<LoginPageScreen> {
             // Logo
             Center(
               child: Text(
-                'sHopMe',
+                'ShopMe',
                 style: TextStyle(
                   fontSize: 40.0,
                   fontWeight: FontWeight.bold,
+                  fontFamily: 'RobotoMono',
                 ),
               ),
             ),
@@ -65,17 +67,17 @@ class _LoginPageScreenState extends State<LoginPageScreen> {
               alignment: Alignment.centerRight,
               child: TextButton(
                 onPressed: () {
-                  // Implement forgot password functionality
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ForgotPasswordScreen(), // Replace with your target screen
+                      builder: (context) => ForgotPasswordScreen(),
                     ),
                   );
                 },
                 child: Text('Forgot Password?', style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
+                  fontFamily: 'RobotoMono',
                 ),),
               ),
             ),
@@ -85,18 +87,20 @@ class _LoginPageScreenState extends State<LoginPageScreen> {
               width: double.infinity,
               height: 50.0,
               child: ElevatedButton(
+
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black, // Background color
+                  backgroundColor: AppColors.blue_blue,
                 ),
                 onPressed: () {
-                  // Implement sign in functionality
 
                 },
                 child: Text(
+
                   'Sign In',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18.0,
+                    fontFamily: 'RobotoMono',
                   ),
                 ),
               ),
@@ -119,20 +123,21 @@ class _LoginPageScreenState extends State<LoginPageScreen> {
               width: double.infinity,
               height: 50.0,
               child: OutlinedButton.icon(
-                // icon: Image.asset(
-                //   'assets/google_logo.png', // Make sure you have a Google logo asset
-                //   height: 24.0,
-                //   width: 24.0,
-                // ),
+                icon: Image.asset(
+                  'assets/images/google_logo.png',
+                  height: 24.0,
+                  width: 24.0,
+                ),
                 label: Text(
                   'Sign in with Google',
                   style: TextStyle(
                     fontSize: 18.0,
                     color: Colors.black,
+                      fontFamily: 'RobotoMono'
                   ),
                 ),
                 onPressed: () {
-                  // Implement sign in with Google functionality
+
                 },
                 style: OutlinedButton.styleFrom(
                   side: BorderSide(color: Colors.black),
@@ -144,7 +149,11 @@ class _LoginPageScreenState extends State<LoginPageScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Don't have an account? "),
+                Text("Don't have an account? ",
+                style: TextStyle(
+                    fontFamily: 'RobotoMono',
+                ),
+                ),
                 GestureDetector(
                   onTap: () {
                     // Navigate to Register Page Screen
@@ -158,8 +167,9 @@ class _LoginPageScreenState extends State<LoginPageScreen> {
                   child: Text(
                     'Sign Up',
                     style: TextStyle(
-                      color: Colors.red,
+                      color: AppColors.blue_blue,
                       fontWeight: FontWeight.bold,
+                      fontFamily: 'RobotoMono',
                     ),
                   ),
                 ),

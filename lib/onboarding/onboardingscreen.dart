@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wucommerce/colors/appcolors.dart';
 import 'package:wucommerce/screens/homepage_screen.dart';
+import 'package:wucommerce/screens/welcomepage_screen.dart';
 
 
 class Onboardingscreen extends StatefulWidget {
@@ -33,7 +34,7 @@ class _OnboardingscreenState extends State<Onboardingscreen> {
   void navigateToNextScreen(BuildContext context) {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => HomepageScreen()),
+      MaterialPageRoute(builder: (context) => WelcomeScreen()),
     );
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wucommerce/colors/appcolors.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   @override
@@ -52,7 +53,7 @@ class ForgotPasswordScreen extends StatelessWidget {
               height: 50.0,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black, // Background color
+                  backgroundColor: AppColors.blue_blue, // Background color
                 ),
                 onPressed: () {
                   // Implement the continue action (e.g., sending OTP)

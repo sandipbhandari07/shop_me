@@ -71,8 +71,10 @@ flutter:
     - assets/images/payments.png
     - assets/images/markets.png
     - assets/images/carts.png
-    - assets/images/social.png
+    - assets/images/wwshop.png
     - assets/images/shopme.png
+    - assets/images/check.png
+    - assets/images/google_logo.png
 
     
 
