@@ -1,58 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:wucommerce/screens/cart/cart_screen.dart';
-import 'package:wucommerce/screens/home/homepage_screen.dart';
-import 'package:wucommerce/screens/profile/profile_screen.dart';
-import 'package:wucommerce/screens/search/search_screen.dart';
-import 'package:wucommerce/screens/wishlist/wishlist_screen.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:wucommerce/utils/theme.dart';
 
-class BottomNavBar extends StatefulWidget {
-  @override
-  _BottomNavBarState createState() => _BottomNavBarState();
-}
+class BottomNavBar extends StatelessWidget {
+  final int selectedIndex;
+  final Function(int) onItemTapped;
 
-class _BottomNavBarState extends State<BottomNavBar> {
-  int _selectedIndex = 0;
-
-  final List<Widget> _pages = [
-
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
+  BottomNavBar({required this.selectedIndex, required this.onItemTapped});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _pages[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart),
-            label: 'Cart',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: 'Wishlist',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-      ),
+    return CurvedNavigationBar(
+      index: selectedIndex,
+      height: 60.0,
+      items: <Widget>[
+        Icon(Icons.home, size: 30, color: Colors.white),
+        Icon(Icons.search, size: 30, color: Colors.white),
+        Icon(Icons.shopping_cart, size: 30, color: Colors.white),
+        Icon(Icons.favorite, size: 30, color: Colors.white),
+        Icon(Icons.person, size: 30, color: Colors.white),
+      ],
+      color: AppColors.blue_blue,
+      buttonBackgroundColor: AppColors.blue_blue,
+      backgroundColor: Colors.transparent,
+      onTap: onItemTapped,
+      animationDuration: Duration(milliseconds: 400),
     );
   }
 }
