@@ -1,15 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:wucommerce/colors/appcolors.dart';
-import 'package:wucommerce/screens/homepage_screen.dart';
-import 'package:wucommerce/signInandUp/loginpage_screen.dart';
-import 'package:wucommerce/signInandUp/registerpage_screen.dart';
+import 'package:flutter/services.dart';
+import '../../utils/theme.dart';
+import '../auth/loginpage_screen.dart';
+import '../auth/registerpage_screen.dart';
+import '../home/homepage_screen.dart';
+
+
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -58,7 +62,6 @@ class WelcomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            //register button
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 40,
@@ -102,7 +105,7 @@ class WelcomeScreen extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => HomepageScreen()));
+                        builder: (context) => HomeScreen()));
               },
               child: const Text(
                 "Continue as a guest",

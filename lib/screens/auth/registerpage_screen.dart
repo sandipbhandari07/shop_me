@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:wucommerce/colors/appcolors.dart';
-import 'package:wucommerce/signInandUp/loginpage_screen.dart';
+import 'package:flutter/services.dart';
+import 'package:wucommerce/screens/auth/loginpage_screen.dart';
+
+import '../../utils/theme.dart';
 
 
 class RegisterPageScreen extends StatefulWidget {
@@ -14,13 +16,13 @@ class _RegisterPageScreenState extends State<RegisterPageScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.0),
         child: ListView(
           children: [
             SizedBox(height: 40.0),
-            // Back Button
             Align(
               alignment: Alignment.centerLeft,
               child: IconButton(
@@ -31,46 +33,52 @@ class _RegisterPageScreenState extends State<RegisterPageScreen> {
               ),
             ),
             SizedBox(height: 20.0),
-            // Create a New Account Text
             Center(
               child: Text(
                 'Create a New Account',
                 style: TextStyle(
                   fontSize: 24.0,
                   fontWeight: FontWeight.bold,
-
-                    fontFamily: 'RobotoMono'
+                  fontFamily: 'RobotoMono',
                 ),
               ),
             ),
             SizedBox(height: 40.0),
             // Full Name TextField
             TextField(
+              style: TextStyle(color: Colors.black),
               decoration: InputDecoration(
                 labelText: 'Full Name',
                 border: OutlineInputBorder(),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: AppColors.blue_blue),
+                ),
               ),
             ),
             SizedBox(height: 20.0),
-            // Email Address TextField
             TextField(
+              style: TextStyle(color: Colors.black),
               decoration: InputDecoration(
                 labelText: 'Email Address',
                 border: OutlineInputBorder(),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: AppColors.blue_blue),
+                ),
               ),
             ),
             SizedBox(height: 20.0),
-            // Password TextField
             TextField(
               obscureText: _isObscure,
+              style: TextStyle(color: Colors.black),
               decoration: InputDecoration(
                 labelText: 'Password',
                 border: OutlineInputBorder(),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: AppColors.blue_blue),
+                ),
                 suffixIcon: IconButton(
                   icon: Icon(
-                    _isObscure
-                        ? Icons.visibility_off
-                        : Icons.visibility,
+                    _isObscure ? Icons.visibility_off : Icons.visibility,
                   ),
                   onPressed: () {
                     setState(() {
@@ -81,7 +89,6 @@ class _RegisterPageScreenState extends State<RegisterPageScreen> {
               ),
             ),
             SizedBox(height: 20.0),
-            // Agree to Terms Checkbox
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -92,12 +99,13 @@ class _RegisterPageScreenState extends State<RegisterPageScreen> {
                       _agreeToTerms = value!;
                     });
                   },
+                  activeColor: AppColors.blue_blue,
+                  checkColor: Colors.white,
                 ),
                 Expanded(
                   child: Text(
-                    "I agree to the Privacy Policy and Terms & Conditions of sHopMe.",
+                    "I agree to the Privacy Policy and Terms & Conditions of ShopMe.",
                     style: TextStyle(fontSize: 14.0),
-
                   ),
                 ),
               ],
@@ -109,36 +117,33 @@ class _RegisterPageScreenState extends State<RegisterPageScreen> {
               height: 50.0,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.blue_blue, // Background color
+                  backgroundColor: AppColors.blue_blue,
                 ),
                 onPressed: _agreeToTerms
-                    ? () {
-                  // Implement registration functionality
-                }
-                    : null, // Disable button if terms are not agreed to
+                    ? () {}
+                    : null,
                 child: Text(
                   'Register',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18.0,
-                      fontFamily: 'RobotoMono'
+                    fontFamily: 'RobotoMono',
                   ),
                 ),
               ),
             ),
             SizedBox(height: 30.0),
-            // Already have an account? Log in
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Already have an account? ",
-                style: TextStyle(
+                Text(
+                  "Already have an account? ",
+                  style: TextStyle(
                     fontFamily: 'RobotoMono',
-                ),
+                  ),
                 ),
                 GestureDetector(
                   onTap: () {
-                    // Navigate to Login Page Screen
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -151,7 +156,7 @@ class _RegisterPageScreenState extends State<RegisterPageScreen> {
                     style: TextStyle(
                       color: AppColors.blue_blue,
                       fontWeight: FontWeight.bold,
-                        fontFamily: 'RobotoMono'
+                      fontFamily: 'RobotoMono',
                     ),
                   ),
                 ),

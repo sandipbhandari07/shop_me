@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:wucommerce/colors/appcolors.dart';
-import 'package:wucommerce/signInandUp/forgotpassword_screen.dart';
-import 'package:wucommerce/signInandUp/registerpage_screen.dart';
-// Make sure this file exists and is properly configured.
+import 'package:flutter/services.dart';
+import 'package:wucommerce/screens/auth/registerpage_screen.dart';
+import 'package:wucommerce/utils/theme.dart';
+
+import 'forgotpassword_screen.dart';
 
 class LoginPageScreen extends StatefulWidget {
   @override
@@ -14,6 +15,7 @@ class _LoginPageScreenState extends State<LoginPageScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
     return Scaffold(
       appBar: AppBar(
       ),
@@ -22,7 +24,6 @@ class _LoginPageScreenState extends State<LoginPageScreen> {
         child: ListView(
           children: [
             SizedBox(height: 60.0),
-            // Logo
             Center(
               child: Text(
                 'ShopMe',
@@ -39,6 +40,9 @@ class _LoginPageScreenState extends State<LoginPageScreen> {
               decoration: InputDecoration(
                 labelText: 'Email Address',
                 border: OutlineInputBorder(),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: AppColors.blue_blue)
+                ),
               ),
             ),
             SizedBox(height: 20.0),
@@ -48,6 +52,9 @@ class _LoginPageScreenState extends State<LoginPageScreen> {
               decoration: InputDecoration(
                 labelText: 'Password',
                 border: OutlineInputBorder(),
+                focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: AppColors.blue_blue)
+                ),
                 suffixIcon: IconButton(
                   icon: Icon(
                     _isObscure
@@ -82,12 +89,10 @@ class _LoginPageScreenState extends State<LoginPageScreen> {
               ),
             ),
             SizedBox(height: 20.0),
-            // Sign In Button
             SizedBox(
               width: double.infinity,
               height: 50.0,
               child: ElevatedButton(
-
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.blue_blue,
                 ),
@@ -106,7 +111,6 @@ class _LoginPageScreenState extends State<LoginPageScreen> {
               ),
             ),
             SizedBox(height: 20.0),
-            // OR Text
             Row(
               children: [
                 Expanded(child: Divider()),
@@ -118,7 +122,6 @@ class _LoginPageScreenState extends State<LoginPageScreen> {
               ],
             ),
             SizedBox(height: 20.0),
-            // Sign In with Google Button
             SizedBox(
               width: double.infinity,
               height: 50.0,
@@ -145,7 +148,6 @@ class _LoginPageScreenState extends State<LoginPageScreen> {
               ),
             ),
             SizedBox(height: 30.0),
-            // Don't have an account? Sign Up
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -156,7 +158,6 @@ class _LoginPageScreenState extends State<LoginPageScreen> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    // Navigate to Register Page Screen
                     Navigator.push(
                       context,
                       MaterialPageRoute(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:wucommerce/splash/splash_screen.dart';
+import 'package:wucommerce/screens/splash/splash_screen.dart';
+
 
 void main() {
   runApp(const MyApp());

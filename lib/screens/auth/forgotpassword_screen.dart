@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:wucommerce/colors/appcolors.dart';
+import 'package:flutter/services.dart';
+import '../../utils/theme.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.0),
@@ -11,7 +13,6 @@ class ForgotPasswordScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 40.0),
-            // Back Button
             IconButton(
               icon: Icon(Icons.arrow_back),
               onPressed: () {
@@ -19,7 +20,6 @@ class ForgotPasswordScreen extends StatelessWidget {
               },
             ),
             SizedBox(height: 20.0),
-            // Forgot Password Text
             Center(
               child: Text(
                 'Forgot Password?',
@@ -30,7 +30,6 @@ class ForgotPasswordScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20.0),
-            // Instruction Text
             Center(
               child: Text(
                 "Don't worry! We will send an OTP to your registered email address.",
@@ -39,7 +38,6 @@ class ForgotPasswordScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 40.0),
-            // Email Address TextField
             TextField(
               decoration: InputDecoration(
                 labelText: 'Email Address',
@@ -47,17 +45,14 @@ class ForgotPasswordScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 40.0),
-            // Continue Button
             SizedBox(
               width: double.infinity,
               height: 50.0,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.blue_blue, // Background color
+                  backgroundColor: AppColors.blue_blue,
                 ),
-                onPressed: () {
-                  // Implement the continue action (e.g., sending OTP)
-                },
+                onPressed: () {},
                 child: Text(
                   'Continue',
                   style: TextStyle(

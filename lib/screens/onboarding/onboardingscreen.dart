@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:wucommerce/colors/appcolors.dart';
-import 'package:wucommerce/screens/homepage_screen.dart';
-import 'package:wucommerce/screens/welcomepage_screen.dart';
+import '../../utils/theme.dart';
+import '../splash/welcomepage_screen.dart';
 
 
 class Onboardingscreen extends StatefulWidget {
@@ -41,7 +40,6 @@ class _OnboardingscreenState extends State<Onboardingscreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Hides the mobile navigation buttons and notification bar
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
     return Scaffold(
       backgroundColor: _getPageColor(_pageIndex),
@@ -84,7 +82,6 @@ class _OnboardingscreenState extends State<Onboardingscreen> {
                   title: onboard_data[index].title,
                   description: onboard_data[index].description,
                 ),
-                //clampingscrollphysics no bouncing effect when scrolling between pages
                 physics: ClampingScrollPhysics(),
               ),
             ),
@@ -240,7 +237,7 @@ class OnBoardContent extends StatelessWidget {
         ),
         SizedBox(height: 10.0),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0), // Added padding to description
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Text(
             description,
             textAlign: TextAlign.center,
