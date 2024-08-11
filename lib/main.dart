@@ -11,8 +11,6 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    // Hides the mobile navigation buttons and notification bar
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
     return const MaterialApp(
 
       debugShowCheckedModeBanner: false,
