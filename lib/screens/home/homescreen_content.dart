@@ -1,37 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:wucommerce/utils/theme.dart';
-
-void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [
-    SystemUiOverlay.top, // Status bar
-    SystemUiOverlay.bottom // Navigation bar
-  ]);
-
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: Colors.red, // Change status bar color
-    statusBarIconBrightness: Brightness.light, // For light icons
-    systemNavigationBarColor: Colors.red, // Change navigation bar color
-    systemNavigationBarIconBrightness: Brightness.light, // For light icons
-  ));
-
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: HomescreenContent(),
-    );
-  }
-}
 
 class HomescreenContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+      return Scaffold(
       appBar: AppBar(
         toolbarHeight: 85,
         backgroundColor: AppColors.blue_blue,
@@ -53,7 +26,7 @@ class HomescreenContent extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 16),
               minimumSize: Size(double.infinity, 50), // Adjusted minimum size
             ),
-            child: Row(
+            child: const Row(
               children: [
                 Icon(Icons.search, color: Colors.grey),
                 SizedBox(width: 8),
@@ -70,6 +43,7 @@ class HomescreenContent extends StatelessWidget {
         actions: [
           IconButton(
             icon: Icon(Icons.notifications, size: 30, color: Colors.white),
+            padding: EdgeInsets.symmetric(),
             onPressed: () {},
           ),
         ],

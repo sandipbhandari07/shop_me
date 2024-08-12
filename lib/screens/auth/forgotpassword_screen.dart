@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import '../../utils/theme.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   @override
@@ -48,16 +46,10 @@ class ForgotPasswordScreen extends StatelessWidget {
               width: double.infinity,
               height: 50.0,
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.blue_blue,
-                ),
                 onPressed: () {},
                 child: Text(
                   'Continue',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18.0,
-                  ),
+                  style: TextStyle(color: Colors.white, fontSize: 18.0),
                 ),
               ),
             ),

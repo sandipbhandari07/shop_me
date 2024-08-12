@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:wucommerce/screens/auth/registerpage_screen.dart';
 import 'package:wucommerce/utils/theme.dart';
-
+import '../home/homepage_screen.dart';
 import 'forgotpassword_screen.dart';
 
 class LoginPageScreen extends StatefulWidget {
+  final bool fromGuestMode;
+
+  LoginPageScreen({this.fromGuestMode = false});
+
   @override
   _LoginPageScreenState createState() => _LoginPageScreenState();
 }
@@ -17,6 +20,24 @@ class _LoginPageScreenState extends State<LoginPageScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.close),
+          onPressed: () {
+            if (widget.fromGuestMode) {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HomeScreen(isGuest: true),
+                ),
+                    (route) => false,
+              );
+            } else {
+              Navigator.pop(context);
+            }
+          },
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.0),
@@ -34,31 +55,27 @@ class _LoginPageScreenState extends State<LoginPageScreen> {
               ),
             ),
             SizedBox(height: 60.0),
-            // Email TextField
             TextField(
               decoration: InputDecoration(
                 labelText: 'Email Address',
                 border: OutlineInputBorder(),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: AppColors.blue_blue)
+                  borderSide: BorderSide(color: AppColors.blue_blue),
                 ),
               ),
             ),
             SizedBox(height: 20.0),
-            // Password TextField
             TextField(
               obscureText: _isObscure,
               decoration: InputDecoration(
                 labelText: 'Password',
                 border: OutlineInputBorder(),
                 focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: AppColors.blue_blue)
+                  borderSide: BorderSide(color: AppColors.blue_blue),
                 ),
                 suffixIcon: IconButton(
                   icon: Icon(
-                    _isObscure
-                        ? Icons.visibility_off
-                        : Icons.visibility,
+                    _isObscure ? Icons.visibility_off : Icons.visibility,
                   ),
                   onPressed: () {
                     setState(() {
@@ -68,7 +85,6 @@ class _LoginPageScreenState extends State<LoginPageScreen> {
                 ),
               ),
             ),
-            // Forgot Password
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
@@ -80,11 +96,14 @@ class _LoginPageScreenState extends State<LoginPageScreen> {
                     ),
                   );
                 },
-                child: Text('Forgot Password?', style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'RobotoMono',
-                ),),
+                child: Text(
+                  'Forgot Password?',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'RobotoMono',
+                  ),
+                ),
               ),
             ),
             SizedBox(height: 20.0),
@@ -96,10 +115,17 @@ class _LoginPageScreenState extends State<LoginPageScreen> {
                   backgroundColor: AppColors.blue_blue,
                 ),
                 onPressed: () {
-
+                  // Handle Sign In action
+                  // After sign in, redirect to HomeScreen with isGuest = false
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HomeScreen(isGuest: false),
+                    ),
+                        (route) => false,
+                  );
                 },
                 child: Text(
-
                   'Sign In',
                   style: TextStyle(
                     color: Colors.white,
@@ -135,11 +161,12 @@ class _LoginPageScreenState extends State<LoginPageScreen> {
                   style: TextStyle(
                     fontSize: 18.0,
                     color: Colors.black,
-                      fontFamily: 'RobotoMono'
+                    fontFamily: 'RobotoMono',
                   ),
                 ),
                 onPressed: () {
-
+                  // Handle Google Sign-In action
+                  // After Google sign in, redirect to HomeScreen with isGuest = false
                 },
                 style: OutlinedButton.styleFrom(
                   side: BorderSide(color: Colors.black),
@@ -150,10 +177,11 @@ class _LoginPageScreenState extends State<LoginPageScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Don't have an account? ",
-                style: TextStyle(
+                Text(
+                  "Don't have an account? ",
+                  style: TextStyle(
                     fontFamily: 'RobotoMono',
-                ),
+                  ),
                 ),
                 GestureDetector(
                   onTap: () {

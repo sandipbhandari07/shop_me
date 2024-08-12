@@ -6,8 +6,6 @@ import '../auth/loginpage_screen.dart';
 import '../auth/registerpage_screen.dart';
 import '../home/homepage_screen.dart';
 
-
-
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
 
@@ -26,7 +24,7 @@ class WelcomeScreen extends StatelessWidget {
               fit: BoxFit.cover,
             ),
             const SizedBox(height: 45),
-            //login button
+            // Login button
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 40,
@@ -53,7 +51,7 @@ class WelcomeScreen extends StatelessWidget {
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 16,
-                              fontFamily: 'RobotoMono'
+                            fontFamily: 'RobotoMono',
                           ),
                         ),
                       ),
@@ -90,7 +88,7 @@ class WelcomeScreen extends StatelessWidget {
                           style: TextStyle(
                             color: Color(0xFF1E232C),
                             fontSize: 16,
-                              fontFamily: 'RobotoMono'
+                            fontFamily: 'RobotoMono',
                           ),
                         ),
                       ),
@@ -105,13 +103,13 @@ class WelcomeScreen extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => HomeScreen()));
+                        builder: (context) => HomeScreen(isGuest: true)));
               },
               child: const Text(
                 "Continue as a guest",
                 style: TextStyle(
                   color: Color(0xFF35C2C1),
-                    fontFamily: 'RobotoMono'
+                  fontFamily: 'RobotoMono',
                 ),
               ),
             ),

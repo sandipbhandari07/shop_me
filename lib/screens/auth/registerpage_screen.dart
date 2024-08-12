@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:wucommerce/screens/auth/loginpage_screen.dart';
-
 import '../../utils/theme.dart';
-
 
 class RegisterPageScreen extends StatefulWidget {
   @override
@@ -17,21 +14,21 @@ class _RegisterPageScreenState extends State<RegisterPageScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.close), // Cross icon
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0, // Remove shadow
+      ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.0),
         child: ListView(
           children: [
             SizedBox(height: 40.0),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: IconButton(
-                icon: Icon(Icons.arrow_back),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ),
-            SizedBox(height: 20.0),
             Center(
               child: Text(
                 'Create a New Account',
@@ -119,7 +116,9 @@ class _RegisterPageScreenState extends State<RegisterPageScreen> {
                   backgroundColor: AppColors.blue_blue,
                 ),
                 onPressed: _agreeToTerms
-                    ? () {}
+                    ? () {
+                  // Handle Registration action
+                }
                     : null,
                 child: Text(
                   'Register',
