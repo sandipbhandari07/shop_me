@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wucommerce/screens/auth/loginpage_screen.dart';
-import '../../utils/theme.dart';
+import '../../utils/theme/theme.dart';
 
 class RegisterPageScreen extends StatefulWidget {
   @override

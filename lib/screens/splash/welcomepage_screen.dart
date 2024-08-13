@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../utils/theme.dart';
+import '../../utils/theme/theme.dart';
 import '../auth/loginpage_screen.dart';
 import '../auth/registerpage_screen.dart';
 import '../home/homepage_screen.dart';

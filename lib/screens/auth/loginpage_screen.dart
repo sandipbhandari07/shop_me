@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wucommerce/screens/auth/registerpage_screen.dart';
-import 'package:wucommerce/utils/theme.dart';
+import 'package:wucommerce/utils/theme/theme.dart';
 import '../home/homepage_screen.dart';
 import 'forgotpassword_screen.dart';
 

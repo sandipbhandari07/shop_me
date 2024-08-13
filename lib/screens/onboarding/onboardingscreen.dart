@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../utils/theme.dart';
+import '../../utils/theme/theme.dart';
 import '../splash/welcomepage_screen.dart';
 
 
