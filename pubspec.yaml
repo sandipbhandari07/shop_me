@@ -42,6 +42,8 @@ dependencies:
   persistent_bottom_nav_bar_v2: ^5.3.0
   font_awesome_flutter: ^10.7.0
   curved_navigation_bar: ^1.0.6
+  flutter_secure_storage: ^8.0.0
+  http: ^1.2.2
 
 
 dev_dependencies:
@@ -78,6 +80,17 @@ flutter:
     - assets/images/shopme.png
     - assets/images/check.png
     - assets/images/google_logo.png
+    - assets/images/icon.png
+    - assets/images/slider/slider.jpg
+    - assets/images/slider/slider2.jpg
+    - assets/images/slider/slider3.jpg
+    - assets/images/slider/slider4.jpg
+    - assets/images/navbar/cart.png
+    - assets/images/navbar/caty.png
+    - assets/images/navbar/heart.png
+    - assets/images/navbar/home.png
+    - assets/images/navbar/user.png
+    - assets/images/category/beauty.png
 
     
 

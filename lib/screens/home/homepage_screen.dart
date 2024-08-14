@@ -9,7 +9,6 @@ import '../auth/loginpage_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   final bool isGuest;
-
   const HomeScreen({Key? key, this.isGuest = false}) : super(key: key);
 
   @override
@@ -24,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
     SearchScreen(),
     CartScreen(),
     WishlistScreen(),
-    widget.isGuest ? Container() : ProfileScreen(), // Show an empty container if guest
+    widget.isGuest ? Container() : ProfileScreen(),
   ];
 
   void _onItemTapped(int index) {

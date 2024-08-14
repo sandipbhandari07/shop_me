@@ -14,43 +14,41 @@ class BottomNavBar extends StatelessWidget {
       index: selectedIndex,
       height: 60.0,
       items: <Widget>[
-        _buildNavItem(Icons.home, 'Home', 0),
-        _buildNavItem(Icons.search, 'Search', 1),
-        _buildNavItem(Icons.shopping_cart, 'Cart', 2),
-        _buildNavItem(Icons.favorite, 'Wishlist', 3),
-        _buildNavItem(Icons.person, 'Profile', 4),
+        _buildNavItem('assets/images/navbar/home.png', 'Home', 0),
+        _buildNavItem('assets/images/navbar/caty.png', 'Category', 1),
+        _buildNavItem('assets/images/navbar/cart.png', 'Cart', 2),
+        _buildNavItem('assets/images/navbar/heart.png', 'Wishlist', 3),
+        _buildNavItem('assets/images/navbar/user.png', 'Profile', 4),
       ],
       color: AppColors.nav_color_back,
       buttonBackgroundColor: AppColors.nav_color_back,
       backgroundColor: Colors.transparent,
       onTap: onItemTapped,
-      animationDuration: Duration(milliseconds: 300),
+      animationDuration: Duration(milliseconds: 200),
     );
   }
 
-  Widget _buildNavItem(IconData icon, String label, int index) {
+  Widget _buildNavItem(String imagePath, String label, int index) {
     bool isSelected = selectedIndex == index;
 
     return Container(
-      width: 100, // Adjust based on your design requirements
+      width: 100,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(height: isSelected ? 4 : 8), // Adjusts vertical position
-          Icon(
-            icon,
-            size: 30,
-            color: AppColors.blue_blue,
+          SizedBox(height: isSelected ? 2 : 4),
+          Image.asset(
+            imagePath,
+            width: 30,
+            height: 30,
+            color: Colors.black,
           ),
           if (isSelected)
-            Padding(
-              padding: const EdgeInsets.only(top: 4.0),
-              child: Text(
-                label,
-                style: TextStyle(
-                  color: AppColors.blue_blue,
-                  fontSize: 12,
-                ),
+            Text(
+              label,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 12,
               ),
             ),
         ],
