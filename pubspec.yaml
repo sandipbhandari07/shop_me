@@ -44,6 +44,8 @@ dependencies:
   curved_navigation_bar: ^1.0.6
   flutter_secure_storage: ^8.0.0
   http: ^1.2.2
+  shared_preferences: ^2.0.15
+  provider: ^6.1.2
 
 
 dev_dependencies:
@@ -91,6 +93,7 @@ flutter:
     - assets/images/navbar/home.png
     - assets/images/navbar/user.png
     - assets/images/category/beauty.png
+    - assets/images/wireless.png
 
     
 
@@ -124,6 +127,10 @@ flutter:
     - family: MontseBold
       fonts:
         - asset: assets/fonts/Montserrat-Bold.ttf
+          weight: 100
+    - family: sfpro
+      fonts:
+        - asset: assets/fonts/SFPRODISPLAYREGULAR.otf
           weight: 100
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

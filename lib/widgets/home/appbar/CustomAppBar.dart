@@ -6,13 +6,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   final Size preferredSize;
 
-  CustomAppBar({Key? key})
-      : preferredSize = Size.fromHeight(105.0),
-        super(key: key);
+  const CustomAppBar({super.key})
+      : preferredSize = const Size.fromHeight(105.0);
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.light,
     ));
@@ -32,6 +31,31 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             icon: Image.asset(
               "assets/images/icon.png",
               height: 20,
+            ),
+          ),
+          // Centered logo
+          RichText(
+            text: const TextSpan(
+              children: [
+                TextSpan(
+                  text: 'Shop',
+                  style: TextStyle(
+                    color: AppColors.blue_blue,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'sfpro',
+                  ),
+                ),
+                TextSpan(
+                  text: 'Me',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'sfpro',
+                  ),
+                ),
+              ],
             ),
           ),
           IconButton(

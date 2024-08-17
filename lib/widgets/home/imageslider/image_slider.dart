@@ -1,5 +1,6 @@
 import 'dart:async'; // Import for Timer
 import 'package:flutter/material.dart';
+import 'package:wucommerce/utils/theme/theme.dart';
 
 class ImageSlider extends StatefulWidget {
   final Function(int) onChange;
@@ -27,7 +28,7 @@ class _ImageSliderState extends State<ImageSlider> {
   }
 
   void _startAutoSlide() {
-    _timer = Timer.periodic(Duration(seconds: 5), (Timer timer) {
+    _timer = Timer.periodic(const Duration(seconds: 5), (Timer timer) {
       int nextPage = (widget.currentSlide + 1) % 4;
       _pageController.animateToPage(
         nextPage,
@@ -95,13 +96,14 @@ class _ImageSliderState extends State<ImageSlider> {
                   height: 8,
                   margin: const EdgeInsets.only(right: 4),
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(50),
                       color: widget.currentSlide == index
-                          ? Colors.black
-                          : Colors.transparent,
+                          ? AppColors.blue_blue
+                          : Colors.white,
                       border: Border.all(
-                        color: Colors.black,
-                      )),
+                        color: Colors.transparent,
+                      ),
+                  ),
                 ),
               ),
             ),

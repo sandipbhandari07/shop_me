@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:wucommerce/screens/auth/registerpage_screen.dart';
+import 'package:wucommerce/screens/home/homepage_screen.dart';
+import 'package:wucommerce/screens/auth/forgotpassword_screen.dart';
 import 'package:wucommerce/utils/theme/theme.dart';
-import '../home/homepage_screen.dart';
-import 'forgotpassword_screen.dart';
+
+import '../../services/api_services.dart';
 
 class LoginPageScreen extends StatefulWidget {
   final bool fromGuestMode;
@@ -14,7 +16,29 @@ class LoginPageScreen extends StatefulWidget {
 }
 
 class _LoginPageScreenState extends State<LoginPageScreen> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
   bool _isObscure = true;
+  String? _errorMessage;
+
+  Future<void> _login() async {
+    final result = await AuthService.login(_emailController.text, _passwordController.text);
+    if (result != null) {
+      if (result.contains('successful')) {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => HomeScreen(isGuest: false),
+          ),
+              (route) => false,
+        );
+      } else {
+        setState(() {
+          _errorMessage = result;
+        });
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +80,7 @@ class _LoginPageScreenState extends State<LoginPageScreen> {
             ),
             SizedBox(height: 60.0),
             TextField(
+              controller: _emailController,
               decoration: InputDecoration(
                 labelText: 'Email Address',
                 border: OutlineInputBorder(),
@@ -66,6 +91,7 @@ class _LoginPageScreenState extends State<LoginPageScreen> {
             ),
             SizedBox(height: 20.0),
             TextField(
+              controller: _passwordController,
               obscureText: _isObscure,
               decoration: InputDecoration(
                 labelText: 'Password',
@@ -85,6 +111,14 @@ class _LoginPageScreenState extends State<LoginPageScreen> {
                 ),
               ),
             ),
+            if (_errorMessage != null)
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: Text(
+                  _errorMessage!,
+                  style: TextStyle(color: Colors.red),
+                ),
+              ),
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
@@ -114,17 +148,7 @@ class _LoginPageScreenState extends State<LoginPageScreen> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.blue_blue,
                 ),
-                onPressed: () {
-                  // Handle Sign In action
-                  // After sign in, redirect to HomeScreen with isGuest = false
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => HomeScreen(isGuest: false),
-                    ),
-                        (route) => false,
-                  );
-                },
+                onPressed: _login,
                 child: Text(
                   'Sign In',
                   style: TextStyle(
@@ -165,8 +189,7 @@ class _LoginPageScreenState extends State<LoginPageScreen> {
                   ),
                 ),
                 onPressed: () {
-                  // Handle Google Sign-In action
-                  // After Google sign in, redirect to HomeScreen with isGuest = false
+
                 },
                 style: OutlinedButton.styleFrom(
                   side: BorderSide(color: Colors.black),

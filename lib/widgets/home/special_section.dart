@@ -22,7 +22,7 @@ class SpecialSection extends StatelessWidget {
           Text(
             title,
             style: const TextStyle(
-              fontSize: 20,
+              fontSize: 16,
               fontWeight: FontWeight.w800,
             ),
           ),
@@ -32,7 +32,7 @@ class SpecialSection extends StatelessWidget {
               actionText,
               style: const TextStyle(
                 fontWeight: FontWeight.w500,
-                fontSize: 15,
+                fontSize: 16,
                 color: Colors.black54,
               ),
             ),

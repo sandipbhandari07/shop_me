@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../models/category.dart';
+import '../../../models/category_model.dart';
 
 
 class CategoryView extends StatefulWidget {
@@ -55,7 +54,6 @@ class _CategoryViewState extends State<CategoryView> {
                     categoriesList[index].title,
                     style: const TextStyle(
                       fontSize: 12,
-                      fontWeight: FontWeight.bold,
                     ),
                   )
                 ],

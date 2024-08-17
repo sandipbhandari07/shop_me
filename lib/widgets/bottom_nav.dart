@@ -20,37 +20,44 @@ class BottomNavBar extends StatelessWidget {
         _buildNavItem('assets/images/navbar/heart.png', 'Wishlist', 3),
         _buildNavItem('assets/images/navbar/user.png', 'Profile', 4),
       ],
-      color: AppColors.nav_color_back,
-      buttonBackgroundColor: AppColors.nav_color_back,
+      color: AppColors.blue_blue,
+      buttonBackgroundColor: AppColors.blue_blue,
       backgroundColor: Colors.transparent,
       onTap: onItemTapped,
-      animationDuration: Duration(milliseconds: 200),
+      animationDuration: const Duration(milliseconds: 200),
     );
   }
 
   Widget _buildNavItem(String imagePath, String label, int index) {
     bool isSelected = selectedIndex == index;
 
-    return Container(
-      width: 100,
+    return SizedBox(
+      width: 50,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(height: isSelected ? 2 : 4),
+          SizedBox(height: isSelected ? 2 : 6),
           Image.asset(
             imagePath,
-            width: 30,
-            height: 30,
-            color: Colors.black,
+            width: 24,
+            height: 24,
+            color: isSelected ? AppColors.white : Colors
+                .white,
           ),
           if (isSelected)
-            Text(
-              label,
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 12,
-              ),
-            ),
+            Column(
+              children: [
+                Text(
+                  label,
+                  style: const TextStyle(
+                    color: AppColors.white,
+                    fontSize: 11,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'sfpro',
+                  ),
+                ),
+              ],
+            )
         ],
       ),
     );
