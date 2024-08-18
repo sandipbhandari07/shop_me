@@ -4,4 +4,4 @@ eCommerce app for Flutter.
 
 | Demo Video |
 | ------------------ | 
-| <img src="./preview/preview.gif" height="400" alt="Screenshot"/>  |
+| <img src="./preview/preview.mp4" height="400" alt="Screenshot"/>  |
