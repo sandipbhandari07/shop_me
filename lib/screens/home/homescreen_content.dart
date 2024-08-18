@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:wucommerce/utils/theme/theme.dart';
 import 'package:wucommerce/widgets/home/product/product_card.dart';
 import '../../models/product_model.dart';
+import '../../utils/system_ui_util.dart';
 import '../../widgets/home/appbar/CustomAppBar.dart';
 import '../../widgets/home/imageslider/image_slider.dart';
 import '../../widgets/home/searchbar/search_bar.dart';
@@ -30,64 +33,78 @@ class _HomescreenContentState extends State<HomescreenContent> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              const MySearchBAR(),
-              const SizedBox(height: 20),
-              SizedBox(
-                height: 220,
-                child: ImageSlider(
-                  currentSlide: _currentSlide,
-                  onChange: _onSlideChange,
-                ),
-              ),
-              const SizedBox(height: 20),
-              const Align(
-                alignment: Alignment.bottomLeft,
-                child: Text(
-                  "Categories",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                    fontFamily: 'sfpro',
-                  ),
-                ),
-              ),
-              const SizedBox(height: 5),
-              CategoryView(
-                selectedIndex: _selectedIndex,
-                onCategorySelected: _onCategorySelected,
-              ),
-              const SizedBox(height: 5),
-              if (_selectedIndex == 0)
-                SpecialSection(
-                  title: "Special For You",
-                  actionText: "See all",
-                  onActionTap: () {
+    // Set system UI overlay styles
+    // Set the fixed system UI overlay styles for this screen
+    SystemUiUtil.setSystemUIOverlay(
+      statusBarColor: Colors.white,
+      statusBarIconBrightness: Brightness.light,
+      navigationBarColor: AppColors.blue_blue,
+      navigationBarIconBrightness: Brightness.light,
+    );
 
-                  },
-                ),
-              GridView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2
-                  ,childAspectRatio: 0.78,
-                    crossAxisSpacing: 20,
-                    mainAxisSpacing: 20
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [
+            CustomAppBar(),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 190,
+                        child: ImageSlider(
+                          currentSlide: _currentSlide,
+                          onChange: _onSlideChange,
+                        ),
+                      ),
+                      const Align(
+                        alignment: Alignment.bottomLeft,
+                        child: Text(
+                          "Categories",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            fontFamily: 'sfpro',
+                          ),
+                        ),
+                      ),
+                      CategoryView(
+                        selectedIndex: _selectedIndex,
+                        onCategorySelected: _onCategorySelected,
+                      ),
+                      const SizedBox(height: 5),
+                      if (_selectedIndex == 0)
+                        SpecialSection(
+                          title: "Special For You",
+                          actionText: "See all",
+                          onActionTap: () {
+                            // Define action
+                          },
+                        ),
+                      const SizedBox(height: 10),
+                      GridView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: 0.78,
+                          crossAxisSpacing: 20,
+                          mainAxisSpacing: 20,
+                        ),
+                        itemCount: products.length,
+                        itemBuilder: (context, index) {
+                          return ProductCard(product: products[index]);
+                        },
+                      ),
+                    ],
                   ),
-                  itemCount: products.length,
-                  itemBuilder: (context, index) {
-                return ProductCard(product: products[index],
-                );
-                },
-              )
-            ],
-          ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

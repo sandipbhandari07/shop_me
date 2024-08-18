@@ -40,7 +40,6 @@ class _OnboardingscreenState extends State<Onboardingscreen> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
     return Scaffold(
       backgroundColor: _getPageColor(_pageIndex),
       body: SafeArea(

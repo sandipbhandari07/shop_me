@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:wucommerce/screens/splash/splash_screen.dart';
 import 'package:wucommerce/utils/theme/font_theme/font_theme.dart';
+import 'package:wucommerce/utils/theme/theme.dart';
 
 
 void main() {

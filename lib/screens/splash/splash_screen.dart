@@ -10,7 +10,6 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
     return AnimatedSplashScreen(
       splash: Center(
         child: Lottie.asset('assets/animation/shop.json'),

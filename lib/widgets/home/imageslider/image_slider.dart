@@ -51,7 +51,7 @@ class _ImageSliderState extends State<ImageSlider> {
     return Stack(
       children: [
         SizedBox(
-          height: 220,
+          height: 180,
           width: double.infinity,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(15),
@@ -83,7 +83,7 @@ class _ImageSliderState extends State<ImageSlider> {
           ),
         ),
         Positioned.fill(
-          bottom: 10,
+          bottom: 25,
           child: Align(
             alignment: Alignment.bottomCenter,
             child: Row(

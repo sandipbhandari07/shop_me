@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../system_ui_util.dart';
+
 class DeviceUtility {
   static void hidekeyboard(BuildContext context){
     FocusScope.of(context).requestFocus(FocusNode());
@@ -22,16 +24,18 @@ class DeviceUtility {
     return viewInsets.bottom != 0;
   }
   static void setFulScreen(bool enable){
-    SystemChrome.setEnabledSystemUIMode(enable? SystemUiMode.immersiveSticky : SystemUiMode.edgeToEdge);
+      SystemUiUtil.setSystemUIOverlay(
+        statusBarColor: Colors.white, // Set the status bar color to white
+        statusBarIconBrightness: Brightness.dark, // Dark icons for better visibility on white
+        navigationBarColor: Colors.blue, // Set the navigation bar color to blue
+        navigationBarIconBrightness: Brightness.light, // Light icons for better visibility on blue
+      );
   }
 
   static double getAppbarHeight() {
     return kToolbarHeight;
   }
 
-  static void showStatusBar() {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
-  }
 
   static Future<bool> hasInternetConnection() async {
     try {
