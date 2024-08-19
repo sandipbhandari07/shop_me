@@ -10,13 +10,11 @@ class _HomescreenContentState extends State<CartScreen> {
   @override
   void initState() {
     super.initState();
-
-    // Set the fixed system UI overlay styles for this screen
     SystemUiUtil.setSystemUIOverlay(
-      statusBarColor: Colors.white, // Set the status bar color to white
-      statusBarIconBrightness: Brightness.dark, // Dark icons for better visibility on white
-      navigationBarColor: Colors.blue, // Set the navigation bar color to blue
-      navigationBarIconBrightness: Brightness.light, // Light icons for better visibility on blue
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+      navigationBarColor: Colors.transparent,
+      navigationBarIconBrightness: Brightness.light,
     );
   }
 

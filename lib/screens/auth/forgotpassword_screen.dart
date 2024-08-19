@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../utils/system_ui_util.dart';
 import '../../utils/theme/theme.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemUiUtil.setSystemUIOverlay(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+      navigationBarColor: Colors.transparent,
+      navigationBarIconBrightness: Brightness.light,
+    );
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.0),

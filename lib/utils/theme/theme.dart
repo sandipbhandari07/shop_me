@@ -9,6 +9,7 @@ class AppColors {
   static const Color nav_color_back = Color.fromRGBO(250, 248, 247, 1.0);
   static const Color white = Color.fromRGBO(250, 248, 247, 1.0);
   static const Color dimwhite = Color.fromRGBO(155, 156, 158, 1.0);
+  static const Color dimblack = Color.fromRGBO(74, 73, 72, 1.0);
 
 
 }

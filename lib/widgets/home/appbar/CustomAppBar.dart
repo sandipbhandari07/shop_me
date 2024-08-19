@@ -13,17 +13,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-      // Set the fixed system UI overlay styles for this screen
-      SystemUiUtil.setSystemUIOverlay(
-        statusBarColor: Colors.white, // Set the status bar color to white
-        statusBarIconBrightness: Brightness.dark, // Dark icons for better visibility on white
-        navigationBarColor: AppColors.blue_blue, // Set the navigation bar color to blue
-        navigationBarIconBrightness: Brightness.light, // Light icons for better visibility on blue
-      );
-
-
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 5.0),
+      padding: const EdgeInsets.symmetric(vertical: 13.5, horizontal: 1.0),
       color: Colors.white,
       child: Row(
         children: [
@@ -33,10 +24,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               padding: const EdgeInsets.all(5),
             ),
             onPressed: () {},
-            icon: Image.asset(
-              "assets/images/icon.png",
-              height: 20,
-            ),
+            iconSize: 30,
+            icon: const Icon(Icons.menu, color: Colors.black),
           ),
           const SizedBox(width: 0,),
           const Expanded(

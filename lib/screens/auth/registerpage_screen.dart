@@ -4,6 +4,7 @@ import 'package:wucommerce/screens/auth/loginpage_screen.dart';
 import 'package:wucommerce/utils/theme/theme.dart';
 
 import '../../services/api_services.dart';
+import '../../utils/system_ui_util.dart';
 import '../home/homepage_screen.dart';
 
 class RegisterPageScreen extends StatefulWidget {
@@ -55,6 +56,12 @@ class _RegisterPageScreenState extends State<RegisterPageScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SystemUiUtil.setSystemUIOverlay(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+      navigationBarColor: Colors.transparent,
+      navigationBarIconBrightness: Brightness.light,
+    );
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(

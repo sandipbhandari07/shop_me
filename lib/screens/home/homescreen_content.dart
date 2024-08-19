@@ -33,23 +33,21 @@ class _HomescreenContentState extends State<HomescreenContent> {
 
   @override
   Widget build(BuildContext context) {
-    // Set system UI overlay styles
-    // Set the fixed system UI overlay styles for this screen
     SystemUiUtil.setSystemUIOverlay(
-      statusBarColor: Colors.white,
-      statusBarIconBrightness: Brightness.light,
-      navigationBarColor: AppColors.blue_blue,
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+      navigationBarColor: Colors.transparent,
       navigationBarIconBrightness: Brightness.light,
     );
-
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           children: [
             CustomAppBar(),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
                 child: SingleChildScrollView(
                   child: Column(
                     children: [

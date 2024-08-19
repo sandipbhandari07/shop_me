@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:wucommerce/utils/system_ui_util.dart';
 import '../../utils/theme/theme.dart';
 import '../auth/loginpage_screen.dart';
 import '../auth/registerpage_screen.dart';
@@ -10,8 +11,13 @@ class WelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    return Scaffold(
+    SystemUiUtil.setSystemUIOverlay(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+      navigationBarColor: Colors.transparent,
+      navigationBarIconBrightness: Brightness.light,
+    );
+      return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(

@@ -6,6 +6,7 @@ import 'package:wucommerce/screens/auth/forgotpassword_screen.dart';
 import 'package:wucommerce/utils/theme/theme.dart';
 
 import '../../services/api_services.dart';
+import '../../utils/system_ui_util.dart';
 
 class LoginPageScreen extends StatefulWidget {
   final bool fromGuestMode;
@@ -43,6 +44,12 @@ class _LoginPageScreenState extends State<LoginPageScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SystemUiUtil.setSystemUIOverlay(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+      navigationBarColor: Colors.transparent,
+      navigationBarIconBrightness: Brightness.light,
+    );
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(

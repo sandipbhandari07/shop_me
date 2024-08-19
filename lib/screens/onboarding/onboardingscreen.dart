@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../../utils/system_ui_util.dart';
 import '../../utils/theme/theme.dart';
 import '../splash/welcomepage_screen.dart';
 
@@ -15,6 +16,7 @@ class Onboardingscreen extends StatefulWidget {
 
 class _OnboardingscreenState extends State<Onboardingscreen> {
 
+
   late PageController _pageController;
   int _pageIndex = 0;
 
@@ -22,6 +24,12 @@ class _OnboardingscreenState extends State<Onboardingscreen> {
   void initState() {
     _pageController = PageController(initialPage: 0);
     super.initState();
+    SystemUiUtil.setSystemUIOverlay(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+      navigationBarColor: Colors.transparent,
+      navigationBarIconBrightness: Brightness.light,
+    );
   }
 
   @override

@@ -4,13 +4,21 @@ import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 import 'package:wucommerce/screens/onboarding/onboardingscreen.dart';
 
+import '../../utils/system_ui_util.dart';
+
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedSplashScreen(
+    SystemUiUtil.setSystemUIOverlay(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+      navigationBarColor: Colors.transparent,
+      navigationBarIconBrightness: Brightness.light,
+    );
+   return AnimatedSplashScreen(
       splash: Center(
         child: Lottie.asset('assets/animation/shop.json'),
       ),
