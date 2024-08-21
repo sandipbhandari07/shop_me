@@ -1,4 +1,4 @@
-eCommerce app using dart.
+eCommerce app using dart flutter.
 
 ## Preview
 
