@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:wucommerce/utils/theme/theme.dart';
 import 'package:wucommerce/widgets/home/product/product_card.dart';
 import '../../models/product_model.dart';
 import '../../utils/system_ui_util.dart';
 import '../../widgets/home/appbar/CustomAppBar.dart';
 import '../../widgets/home/imageslider/image_slider.dart';
-import '../../widgets/home/searchbar/search_bar.dart';
 import '../../widgets/home/category/category_view.dart';
 import '../../widgets/home/special_section.dart';
 

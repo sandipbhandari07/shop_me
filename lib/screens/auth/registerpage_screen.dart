@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:wucommerce/screens/auth/loginpage_screen.dart';
 import 'package:wucommerce/utils/theme/theme.dart';
-
-import '../../services/api_services.dart';
+import '../../services/auth_services.dart';
 import '../../utils/system_ui_util.dart';
 import '../home/homepage_screen.dart';
 
@@ -62,6 +61,7 @@ class _RegisterPageScreenState extends State<RegisterPageScreen> {
       navigationBarColor: Colors.transparent,
       navigationBarIconBrightness: Brightness.light,
     );
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
