@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:wucommerce/utils/theme/theme.dart';
 import 'package:wucommerce/widgets/home/product/product_card.dart';
 import '../../models/product_model.dart';
+import '../../services/profile_service.dart';
 import '../../utils/system_ui_util.dart';
 import '../../widgets/home/appbar/CustomAppBar.dart';
 import '../../widgets/home/imageslider/image_slider.dart';
+import '../../widgets/home/searchbar/search_bar.dart';
 import '../../widgets/home/category/category_view.dart';
 import '../../widgets/home/special_section.dart';
 
@@ -16,6 +19,7 @@ class HomescreenContent extends StatefulWidget {
 class _HomescreenContentState extends State<HomescreenContent> {
   int _currentSlide = 0;
   int _selectedIndex = 0;
+
 
   void _onSlideChange(int index) {
     setState(() {
@@ -37,6 +41,7 @@ class _HomescreenContentState extends State<HomescreenContent> {
       navigationBarColor: Colors.transparent,
       navigationBarIconBrightness: Brightness.light,
     );
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(

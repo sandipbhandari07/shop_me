@@ -1,89 +1,119 @@
+import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:http/http.dart' as http;
-import 'dart:io';
+import 'package:wucommerce/config/config.dart';
 
 class AuthService {
-  static const String _baseUrl = "http://192.168.1.68/ims/api";
-  static const storage = FlutterSecureStorage();
-  static String? username;
-  static String? userEmail;
+  static final _storage = FlutterSecureStorage();
+
+  static Future<String?> register(
+      String name,
+      String email,
+      String phone,
+      String password,
+      String passwordConfirmation,
+      ) async {
+    try {
+      final response = await http.post(
+        Uri.parse('$apiUrl/customer/register'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode({
+          'name': name,
+          'email': email,
+          'phone': phone,
+          'password': password,
+          'password_confirmation': passwordConfirmation,
+        }),
+      );
+
+      final responseData = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        final token = responseData['token'];
+        if (token != null) {
+          await _storage.write(key: 'token', value: token);
+        }
+        return 'Registration successful';
+      } else if (response.statusCode == 422) {
+        return responseData['errors'].toString();
+      } else {
+        return 'Error: ${responseData['message']}';
+      }
+    } catch (e) {
+      return 'An unexpected error occurred: $e';
+    }
+  }
 
   static Future<String?> login(String email, String password) async {
     try {
       final response = await http.post(
-        Uri.parse("$_baseUrl/customer/login"),
-        headers: {"Content-Type": "application/json"},
+        Uri.parse('$apiUrl/customer/login'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
         body: jsonEncode({
-          "email": email,
-          "password": password,
+          'email': email,
+          'password': password,
         }),
       );
 
+      final responseData = jsonDecode(response.body);
+
       if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        if (data["status"] == "success") {
-          username = data["data"]["name"];
-          userEmail = data["data"]["email"];
-          print('Username: $username'); // Debug print
-          print('UserEmail: $userEmail'); // Debug print
-          return "Login successful";
-        } else {
-          return data["message"];
-        }
+        await _storage.write(key: 'token', value: responseData['token']);
+        return 'Login successful';
+      } else if (response.statusCode == 401) {
+        return 'Invalid email or password';
       } else {
-        return "Something went wrong. Please try again.";
+        return 'An error occurred: ${responseData['message']}';
       }
-    } on SocketException {
-      return "No Internet connection. Please check your network.";
-    } on HttpException {
-      return "Couldn't connect to the server. Please try again later.";
-    } on FormatException {
-      return "Bad response format from the server.";
     } catch (e) {
-      return "Unexpected error: ${e.toString()}";
+      return 'An unexpected error occurred: $e';
     }
   }
 
-  static Future<String?> register(String name, String email, String password, String confirmPassword) async {
+  static Future<String?> getToken() async {
+    return await _storage.read(key: 'token');
+  }
+
+  static Future<void> clearToken() async {
     try {
-      final response = await http.post(
-        Uri.parse("$_baseUrl/customer/register"),
-        headers: {"Content-Type": "application/json"},
-        body: jsonEncode({
-          "name": name,
-          "email": email,
-          "password": password,
-          "password_confirmation": confirmPassword,
-        }),
-      );
-
-      if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        if (data["status"] == "success") {
-          username = data["data"]["name"];
-          userEmail = data["data"]["email"];
-          print('Username: $username'); // Debug print
-          print('UserEmail: $userEmail'); // Debug print
-          return "Registration successful";
-        } else {
-          return data["message"];
-        }
-      } else {
-        return "Something went wrong. Please try again.";
-      }
-    } on SocketException {
-      return "No Internet connection. Please check your network.";
-    } on HttpException {
-      return "Couldn't connect to the server. Please try again later.";
-    } on FormatException {
-      return "Bad response format from the server.";
+      await _storage.delete(key: 'token');
     } catch (e) {
-      return "Unexpected error: ${e.toString()}";
+      print('An error occurred while clearing the token: $e');
     }
   }
 
-  static getUsername() {}
 
-  static getUserEmail() {}
+  static Future<Map<String, dynamic>?> fetchProfileData() async {
+    try {
+      final token = await getToken();
+      if (token == null) {
+        return null;
+      }
+
+      final response = await http.get(
+        Uri.parse('$apiUrl/customer/profile'),
+        headers: <String, String>{
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      );
+
+      final responseData = jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        return responseData;
+      } else {
+        print('Error fetching profile data: ${responseData['message']}');
+        return null;
+      }
+    } catch (e) {
+      print('An unexpected error occurred while fetching profile data: $e');
+      return null;
+    }
+  }
+
+
 }

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:wucommerce/screens/auth/loginpage_screen.dart';
 import 'package:wucommerce/utils/theme/theme.dart';
+
+import '../../services/api_services.dart';
 import '../../services/auth_services.dart';
 import '../../utils/system_ui_util.dart';
 import '../home/homepage_screen.dart';
@@ -16,6 +18,7 @@ class _RegisterPageScreenState extends State<RegisterPageScreen> {
   bool _agreeToTerms = false;
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
+  final _phoneController = TextEditingController();
   final _passwordController = TextEditingController();
   final _passwordConfirmController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -27,6 +30,7 @@ class _RegisterPageScreenState extends State<RegisterPageScreen> {
         final result = await AuthService.register(
           _nameController.text,
           _emailController.text,
+          _phoneController.text,
           _passwordController.text,
           _passwordConfirmController.text,
         );
@@ -61,7 +65,6 @@ class _RegisterPageScreenState extends State<RegisterPageScreen> {
       navigationBarColor: Colors.transparent,
       navigationBarIconBrightness: Brightness.light,
     );
-
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -124,6 +127,28 @@ class _RegisterPageScreenState extends State<RegisterPageScreen> {
                   final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+$');
                   if (!emailRegex.hasMatch(value)) {
                     return 'Please enter a valid email address';
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(height: 20.0),
+              TextFormField(
+                controller: _phoneController, // Added phone field
+                decoration: InputDecoration(
+                  labelText: 'Phone Number',
+                  border: OutlineInputBorder(),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: AppColors.blue_blue),
+                  ),
+                ),
+                keyboardType: TextInputType.phone,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your phone number';
+                  }
+                  final phoneRegex = RegExp(r'^\d{10}$'); // Adjust this based on your desired format
+                  if (!phoneRegex.hasMatch(value)) {
+                    return 'Please enter a valid phone number';
                   }
                   return null;
                 },

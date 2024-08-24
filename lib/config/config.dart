@@ -1,1 +1,1 @@
-const String apiUrl = 'http://192.168.1.68/ims/api';
+const String apiUrl = 'https://inventory.anoopinnovations.com/api';
