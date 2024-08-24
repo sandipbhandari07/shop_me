@@ -6,6 +6,7 @@ import 'package:wucommerce/screens/auth/forgotpassword_screen.dart';
 import 'package:wucommerce/utils/theme/theme.dart';
 
 import '../../services/api_services.dart';
+import '../../services/auth_services.dart';
 import '../../utils/system_ui_util.dart';
 
 class LoginPageScreen extends StatefulWidget {
@@ -26,7 +27,7 @@ class _LoginPageScreenState extends State<LoginPageScreen> {
   Future<void> _login() async {
     final result = await AuthService.login(_emailController.text, _passwordController.text);
     if (result != null) {
-      if (result.contains('successful')) {
+      if (result.contains('Login successful')) {
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(

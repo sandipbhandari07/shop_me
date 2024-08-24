@@ -44,9 +44,10 @@ dependencies:
   curved_navigation_bar: ^1.0.6
   flutter_secure_storage: ^8.0.0
   http: ^1.2.2
-  shared_preferences: ^2.0.15
   provider: ^6.1.2
   flashy_tab_bar2: ^0.0.10
+  dio: ^5.6.0
+  shared_preferences: ^2.3.2
 
 
 dev_dependencies:

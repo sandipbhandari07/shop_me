@@ -1,1 +1,1 @@
-const String apiUrl = 'https://api.thecodepie.com/public/api';
+const String apiUrl = 'https://inventory.anoopinnovations.com/api';
