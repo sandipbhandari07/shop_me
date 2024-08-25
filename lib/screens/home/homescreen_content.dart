@@ -55,12 +55,13 @@ class _HomescreenContentState extends State<HomescreenContent> {
                   child: Column(
                     children: [
                       SizedBox(
-                        height: 190,
+                        height: 130,
                         child: ImageSlider(
                           currentSlide: _currentSlide,
                           onChange: _onSlideChange,
                         ),
                       ),
+                      SizedBox(height: 16),
                       const Align(
                         alignment: Alignment.bottomLeft,
                         child: Text(

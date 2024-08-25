@@ -135,7 +135,7 @@ class _RegisterPageScreenState extends State<RegisterPageScreen> {
               ),
               SizedBox(height: 20.0),
               TextFormField(
-                controller: _phoneController, // Added phone field
+                controller: _phoneController,
                 decoration: InputDecoration(
                   labelText: 'Phone Number',
                   border: OutlineInputBorder(),
@@ -148,7 +148,7 @@ class _RegisterPageScreenState extends State<RegisterPageScreen> {
                   if (value == null || value.isEmpty) {
                     return 'Please enter your phone number';
                   }
-                  final phoneRegex = RegExp(r'^\d{10}$'); // Adjust this based on your desired format
+                  final phoneRegex = RegExp(r'^\d{10}$');
                   if (!phoneRegex.hasMatch(value)) {
                     return 'Please enter a valid phone number';
                   }

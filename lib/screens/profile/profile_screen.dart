@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:wucommerce/utils/theme/theme.dart';
 import '../../services/auth_services.dart';
 import '../splash/welcomepage_screen.dart';
-
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -35,8 +35,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Profile'),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1.0),
+          child: Container(
+            height: 1.0,
+            color: Colors.grey.withOpacity(0.5),
+          ),
+        ),
+        title: Text(
+          'My Profile',
+          style: TextStyle(
+            color: AppColors.dimblack,
+            fontFamily: 'Montse',
+          ),
+        ),
+        centerTitle: true,
       ),
       body: _profileData == null
           ? Center(child: CircularProgressIndicator())
@@ -45,110 +62,160 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                CircleAvatar(
-                  radius: 40,
-                  backgroundImage: AssetImage(
-                      'assets/images/profile_placeholder.png'),
-                ),
-                SizedBox(width: 16),
-                Column(
+            Text(
+              'Account Information',
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: AppColors.blue_blue,
+                fontFamily: 'Montse',
+              ),
+            ),
+            SizedBox(height: 16),
+            Card(
+              elevation: 3,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      _profileData!['customer_name'] ?? 'Name',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(height: 8),
-                    Text(
-                      _profileData!['email'] ?? 'Email',
-                      style: TextStyle(color: Colors.grey[700]),
-                    ),
-                    SizedBox(height: 4),
-                    Text(
-                      _profileData!['phone'] ?? 'Phone',
-                      style: TextStyle(color: Colors.grey[700]),
-                    ),
+                    _buildInfoRow('Name', _profileData!['customer_name']),
+                    SizedBox(height: 10),
+                    _buildInfoRow('Email', _profileData!['email']),
+                    SizedBox(height: 10),
+                    _buildInfoRow('Phone', _profileData!['phone']),
                   ],
                 ),
-              ],
-            ),
-            SizedBox(height: 20),
-            Card(
-              child: Column(
-                children: [
-                  ListTile(
-                    leading: Icon(Icons.shopping_bag),
-                    title: Text('My Orders'),
-                    trailing: Icon(Icons.arrow_forward_ios),
-                    onTap: () {
-                    },
-                  ),
-                  Divider(),
-                  ListTile(
-                    leading: Icon(Icons.location_on),
-                    title: Text('My Addresses'),
-                    trailing: Icon(Icons.arrow_forward_ios),
-                    onTap: () {
-                    },
-                  ),
-                  Divider(),
-                  ListTile(
-                    leading: Icon(Icons.payment),
-                    title: Text('Payment Methods'),
-                    trailing: Icon(Icons.arrow_forward_ios),
-                    onTap: () {
-                    },
-                  ),
-                  Divider(),
-                  ListTile(
-                    leading: Icon(Icons.settings),
-                    title: Text('Settings'),
-                    trailing: Icon(Icons.arrow_forward_ios),
-                    onTap: () {
-                    },
-                  ),
-                ],
               ),
             ),
-            SizedBox(height: 20),
-
-            // Other Services
-            Card(
-              child: Column(
-                children: [
-                  ListTile(
-                    leading: Icon(Icons.favorite),
-                    title: Text('Wishlist'),
-                    trailing: Icon(Icons.arrow_forward_ios),
-                    onTap: () {
-                    },
-                  ),
-                  Divider(),
-                  ListTile(
-                    leading: Icon(Icons.help),
-                    title: Text('Help & Support'),
-                    trailing: Icon(Icons.arrow_forward_ios),
-                    onTap: () {
-                    },
-                  ),
-                  Divider(),
-                  ListTile(
-                    leading: Icon(Icons.logout),
-                    title: Text('Logout'),
-                    trailing: Icon(Icons.arrow_forward_ios),
-                    onTap: _logout, // Handle logout
-                  ),
-                ],
-              ),
-            ),
+            SizedBox(height: 10),
+            _buildProfileOptionsCard(),
+            SizedBox(height: 10),
+            _buildAdditionalOptionsCard(),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildInfoRow(String title, String? value) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
+            fontFamily: 'Montse',
+          ),
+        ),
+        Text(
+          value ?? 'N/A',
+          style: TextStyle(
+            fontSize: 16,
+            color: Colors.grey[700],
+            fontFamily: 'Montse',
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildProfileOptionsCard() {
+    return Card(
+      elevation: 3,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      child: Column(
+        children: [
+          _buildListTile(
+            icon: Icons.shopping_bag,
+            title: 'My Orders',
+            onTap: () {},
+          ),
+          _buildDivider(),
+          _buildListTile(
+            icon: Icons.location_on,
+            title: 'My Addresses',
+            onTap: () {},
+          ),
+          _buildDivider(),
+          _buildListTile(
+            icon: Icons.payment,
+            title: 'Payment Methods',
+            onTap: () {},
+          ),
+          _buildDivider(),
+          _buildListTile(
+            icon: Icons.settings,
+            title: 'Settings',
+            onTap: () {},
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAdditionalOptionsCard() {
+    return Card(
+      elevation: 3,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      child: Column(
+        children: [
+          _buildListTile(
+            icon: Icons.favorite,
+            title: 'Wishlist',
+            onTap: () {},
+          ),
+          _buildDivider(),
+          _buildListTile(
+            icon: Icons.help,
+            title: 'Help & Support',
+            onTap: () {},
+          ),
+          _buildDivider(),
+          _buildListTile(
+            icon: Icons.logout,
+            title: 'Logout',
+            onTap: _logout,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildListTile({
+    required IconData icon,
+    required String title,
+    required VoidCallback onTap,
+  }) {
+    return ListTile(
+      leading: Icon(icon, color: AppColors.blue_blue),
+      title: Text(
+        title,
+        style: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+          fontFamily: 'Montse',
+        ),
+      ),
+      trailing: Icon(Icons.arrow_forward_ios, color: Colors.grey),
+      onTap: onTap,
+    );
+  }
+
+  Widget _buildDivider() {
+    return Divider(
+      height: 1,
+      thickness: 1,
+      color: Colors.grey[300],
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wucommerce/screens/cart/cart_screen.dart';
+import 'package:wucommerce/screens/category/category_screen.dart';
 import 'package:wucommerce/screens/home/homescreen_content.dart';
 import 'package:wucommerce/screens/profile/profile_screen.dart';
 import 'package:wucommerce/screens/search/search_screen.dart';
@@ -27,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   List<Widget> get _screens => [
     HomescreenContent(),
-    SearchScreen(),
+    CategoryScreen(),
     CartScreen(),
     WishlistScreen(),
     widget.isGuest ? Container() : ProfileScreen(),

@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 
+import '../models/category_model.dart';
+
 class AuthService {
   static const _storage = FlutterSecureStorage();
 
@@ -16,8 +18,6 @@ class AuthService {
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         final token = data['data']['token'];
-
-        // Save the token securely
         await _storage.write(key: 'auth_token', value: token);
 
         return 'success';
@@ -38,8 +38,8 @@ class AuthService {
           'name': name,
           'email': email,
           'phone': phone,
-          'password': password, // Added password
-          'password_confirmation': passwordConfirmation, // Added password confirmation
+          'password': password,
+          'password_confirmation': passwordConfirmation,
         }),
       );
 
