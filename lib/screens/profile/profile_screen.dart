@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wucommerce/screens/auth/changepassword_screen.dart';
 import 'package:wucommerce/utils/theme/theme.dart';
 import '../../services/auth_services.dart';
 import '../splash/welcomepage_screen.dart';
@@ -133,6 +134,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
       child: Column(
         children: [
+          _buildListTile(
+            icon: Icons.password_sharp,
+            title: 'Change Password',
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ChangePasswordScreen()),);
+            },
+          ),
+          _buildDivider(),
           _buildListTile(
             icon: Icons.shopping_bag,
             title: 'My Orders',

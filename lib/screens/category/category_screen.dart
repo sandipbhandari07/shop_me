@@ -97,7 +97,7 @@ class CategoryScreen extends StatelessWidget {
                     ),
                     trailing: Icon(Icons.arrow_forward_ios),
                     onTap: () {
-                      // Navigate to category details or related screen
+
                     },
                   ),
                 );
