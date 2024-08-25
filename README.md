@@ -4,4 +4,4 @@ eCommerce app using dart flutter.
 
 | Demo Video |
 | ------------------ | 
-| <img src="./preview/preview.gif" height="400" alt="Screenshot"/>  |
+| <img src="./preview/preview1.gif" height="400" alt="Screenshot"/>  |
