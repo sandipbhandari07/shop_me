@@ -1,119 +1,88 @@
-import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:wucommerce/config/config.dart';
+import 'package:http/http.dart' as http;
 
 class AuthService {
-  static final _storage = FlutterSecureStorage();
-
-  static Future<String?> register(
-      String name,
-      String email,
-      String phone,
-      String password,
-      String passwordConfirmation,
-      ) async {
-    try {
-      final response = await http.post(
-        Uri.parse('$apiUrl/customer/register'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: jsonEncode({
-          'name': name,
-          'email': email,
-          'phone': phone,
-          'password': password,
-          'password_confirmation': passwordConfirmation,
-        }),
-      );
-
-      final responseData = jsonDecode(response.body);
-
-      if (response.statusCode == 200) {
-        final token = responseData['token'];
-        if (token != null) {
-          await _storage.write(key: 'token', value: token);
-        }
-        return 'Registration successful';
-      } else if (response.statusCode == 422) {
-        return responseData['errors'].toString();
-      } else {
-        return 'Error: ${responseData['message']}';
-      }
-    } catch (e) {
-      return 'An unexpected error occurred: $e';
-    }
-  }
+  static const _storage = FlutterSecureStorage();
 
   static Future<String?> login(String email, String password) async {
     try {
       final response = await http.post(
-        Uri.parse('$apiUrl/customer/login'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
+        Uri.parse('https://inventory.anoopinnovations.com/api/customer/login'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({'email': email, 'password': password}),
+      );
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        final token = data['data']['token'];
+
+        // Save the token securely
+        await _storage.write(key: 'auth_token', value: token);
+
+        return 'success';
+      } else {
+        return 'Login failed: ${response.body}';
+      }
+    } catch (e) {
+      return 'Error: $e';
+    }
+  }
+
+  static Future<String?> register(String name, String email, String phone, String password, String passwordConfirmation) async {
+    try {
+      final response = await http.post(
+        Uri.parse('https://inventory.anoopinnovations.com/api/customer/register'),
+        headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
+          'name': name,
           'email': email,
-          'password': password,
+          'phone': phone,
+          'password': password, // Added password
+          'password_confirmation': passwordConfirmation, // Added password confirmation
         }),
       );
 
-      final responseData = jsonDecode(response.body);
-
       if (response.statusCode == 200) {
-        await _storage.write(key: 'token', value: responseData['token']);
-        return 'Login successful';
-      } else if (response.statusCode == 401) {
-        return 'Invalid email or password';
+        final data = jsonDecode(response.body);
+        final token = data['data']['token'];
+
+        // Save the token securely
+        await _storage.write(key: 'auth_token', value: token);
+
+        return 'success';
       } else {
-        return 'An error occurred: ${responseData['message']}';
+        return 'Registration failed: ${response.body}';
       }
     } catch (e) {
-      return 'An unexpected error occurred: $e';
+      return 'Error: $e';
     }
   }
 
-  static Future<String?> getToken() async {
-    return await _storage.read(key: 'token');
-  }
-
-  static Future<void> clearToken() async {
+  static Future<Map<String, dynamic>?> fetchProfile() async {
     try {
-      await _storage.delete(key: 'token');
-    } catch (e) {
-      print('An error occurred while clearing the token: $e');
-    }
-  }
-
-
-  static Future<Map<String, dynamic>?> fetchProfileData() async {
-    try {
-      final token = await getToken();
-      if (token == null) {
-        return null;
-      }
+      final token = await _storage.read(key: 'auth_token');
+      if (token == null) return null;
 
       final response = await http.get(
-        Uri.parse('$apiUrl/customer/profile'),
-        headers: <String, String>{
+        Uri.parse('https://inventory.anoopinnovations.com/api/customer/profile'),
+        headers: {
+          'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
-          'Content-Type': 'application/json; charset=UTF-8',
         },
       );
 
-      final responseData = jsonDecode(response.body);
       if (response.statusCode == 200) {
-        return responseData;
+        return jsonDecode(response.body)['data']['user'];
       } else {
-        print('Error fetching profile data: ${responseData['message']}');
         return null;
       }
     } catch (e) {
-      print('An unexpected error occurred while fetching profile data: $e');
       return null;
     }
   }
-
-
+  static Future<void> logout() async {
+    final storage = FlutterSecureStorage();
+    await storage.deleteAll();
+  }
 }

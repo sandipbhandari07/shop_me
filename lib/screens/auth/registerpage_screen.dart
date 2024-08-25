@@ -34,12 +34,13 @@ class _RegisterPageScreenState extends State<RegisterPageScreen> {
           _passwordController.text,
           _passwordConfirmController.text,
         );
+
         if (result != null) {
-          if (result.contains('successful')) {
+          if (result.contains('success')) {
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
-                builder: (context) => HomeScreen(isGuest: false),
+                builder: (context) => HomeScreen(isGuest: false,),
               ),
                   (route) => false,
             );
@@ -56,6 +57,7 @@ class _RegisterPageScreenState extends State<RegisterPageScreen> {
       }
     }
   }
+
 
   @override
   Widget build(BuildContext context) {

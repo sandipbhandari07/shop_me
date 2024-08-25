@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:wucommerce/screens/splash/welcomepage_screen.dart';
-import 'package:wucommerce/utils/theme/theme.dart';
-
 import '../../services/auth_services.dart';
+import '../splash/welcomepage_screen.dart';
+
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -10,172 +9,145 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  String username = '';
-  String email = '';
-  String phoneNumber = '';
-  bool isLoading = true;
+  Map<String, dynamic>? _profileData;
 
   @override
   void initState() {
     super.initState();
-    _getUserData();
+    _loadProfileData();
   }
 
-  Future<void> _getUserData() async {
+  Future<void> _loadProfileData() async {
+    final data = await AuthService.fetchProfile();
     setState(() {
-      isLoading = true;
-    });
-
-    final profileData = await AuthService.fetchProfileData();
-
-    if (profileData != null) {
-      setState(() {
-        username = profileData['name'] ?? 'N/A';
-        email = profileData['email'] ?? 'N/A';
-        phoneNumber = profileData['phone'] ?? 'N/A';
-      });
-    }
-
-    setState(() {
-      isLoading = false;
+      _profileData = data;
     });
   }
 
-  void logout() {
-    AuthService.getToken().then((value) {
-      AuthService.clearToken();
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => const WelcomeScreen(),
-        ),
-      );
-    });
+  void _logout() async {
+    await AuthService.logout();
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => WelcomeScreen()),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile', style: TextStyle(fontWeight: FontWeight.bold)),
-        centerTitle: true,
-        backgroundColor: AppColors.blue_blue,
+        title: Text('Profile'),
       ),
-      body: isLoading
+      body: _profileData == null
           ? Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                CircleAvatar(
+                  radius: 40,
+                  backgroundImage: AssetImage(
+                      'assets/images/profile_placeholder.png'),
                 ),
-                elevation: 4,
-                margin: EdgeInsets.only(bottom: 20),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Account Information',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.blue_blue,
-                        ),
+                SizedBox(width: 16),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      _profileData!['customer_name'] ?? 'Name',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
                       ),
-                      SizedBox(height: 12),
-                      _buildProfileInfoRow(Icons.person, 'Username:', username),
-                      _buildProfileInfoRow(Icons.email, 'Email:', email),
-                      _buildProfileInfoRow(Icons.phone, 'Phone:', phoneNumber),
-                    ],
-                  ),
-                ),
-              ),
-              _buildProfileActionItem(
-                icon: Icons.settings,
-                title: 'Settings',
-                onTap: () {},
-              ),
-              _buildProfileActionItem(
-                icon: Icons.history,
-                title: 'Order History',
-                onTap: () {},
-              ),
-              _buildProfileActionItem(
-                icon: Icons.location_on,
-                title: 'Address',
-                onTap: () {},
-              ),
-              _buildProfileActionItem(
-                icon: Icons.payment,
-                title: 'Payment Methods',
-                onTap: () {},
-              ),
-              _buildProfileActionItem(
-                icon: Icons.help,
-                title: 'Support',
-                onTap: () {},
-              ),
-              SizedBox(height: 20),
-              Center(
-                child: ElevatedButton.icon(
-                  onPressed: logout,
-                  icon: Icon(Icons.logout, color: Colors.white),
-                  label: Text(
-                    'Logout',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(horizontal: 40, vertical: 12),
-                    backgroundColor: AppColors.blue_blue,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
                     ),
-                  ),
+                    SizedBox(height: 8),
+                    Text(
+                      _profileData!['email'] ?? 'Email',
+                      style: TextStyle(color: Colors.grey[700]),
+                    ),
+                    SizedBox(height: 4),
+                    Text(
+                      _profileData!['phone'] ?? 'Phone',
+                      style: TextStyle(color: Colors.grey[700]),
+                    ),
+                  ],
                 ),
+              ],
+            ),
+            SizedBox(height: 20),
+            Card(
+              child: Column(
+                children: [
+                  ListTile(
+                    leading: Icon(Icons.shopping_bag),
+                    title: Text('My Orders'),
+                    trailing: Icon(Icons.arrow_forward_ios),
+                    onTap: () {
+                    },
+                  ),
+                  Divider(),
+                  ListTile(
+                    leading: Icon(Icons.location_on),
+                    title: Text('My Addresses'),
+                    trailing: Icon(Icons.arrow_forward_ios),
+                    onTap: () {
+                    },
+                  ),
+                  Divider(),
+                  ListTile(
+                    leading: Icon(Icons.payment),
+                    title: Text('Payment Methods'),
+                    trailing: Icon(Icons.arrow_forward_ios),
+                    onTap: () {
+                    },
+                  ),
+                  Divider(),
+                  ListTile(
+                    leading: Icon(Icons.settings),
+                    title: Text('Settings'),
+                    trailing: Icon(Icons.arrow_forward_ios),
+                    onTap: () {
+                    },
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+            SizedBox(height: 20),
+
+            // Other Services
+            Card(
+              child: Column(
+                children: [
+                  ListTile(
+                    leading: Icon(Icons.favorite),
+                    title: Text('Wishlist'),
+                    trailing: Icon(Icons.arrow_forward_ios),
+                    onTap: () {
+                    },
+                  ),
+                  Divider(),
+                  ListTile(
+                    leading: Icon(Icons.help),
+                    title: Text('Help & Support'),
+                    trailing: Icon(Icons.arrow_forward_ios),
+                    onTap: () {
+                    },
+                  ),
+                  Divider(),
+                  ListTile(
+                    leading: Icon(Icons.logout),
+                    title: Text('Logout'),
+                    trailing: Icon(Icons.arrow_forward_ios),
+                    onTap: _logout, // Handle logout
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildProfileInfoRow(IconData icon, String label, String value) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Row(
-        children: [
-          Icon(icon, color: AppColors.blue_blue, size: 20),
-          SizedBox(width: 12),
-          Text(
-            label,
-            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-          ),
-          SizedBox(width: 8),
-          Text(
-            value.isNotEmpty ? value : 'Loading...',
-            style: TextStyle(fontSize: 16),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildProfileActionItem({required IconData icon, required String title, required Function() onTap}) {
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      elevation: 2,
-      margin: EdgeInsets.symmetric(vertical: 8),
-      child: ListTile(
-        leading: Icon(icon, color: AppColors.blue_blue),
-        title: Text(title, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
-        trailing: Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey),
-        onTap: onTap,
       ),
     );
   }

@@ -26,20 +26,19 @@ class _LoginPageScreenState extends State<LoginPageScreen> {
 
   Future<void> _login() async {
     final result = await AuthService.login(_emailController.text, _passwordController.text);
-    if (result != null) {
-      if (result.contains('Login successful')) {
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-            builder: (context) => HomeScreen(isGuest: false),
-          ),
-              (route) => false,
-        );
-      } else {
-        setState(() {
-          _errorMessage = result;
-        });
-      }
+    if (result == 'success') {
+      // Navigate to the WelcomeScreen
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomeScreen(isGuest: false), // Or WelcomeScreen if you prefer
+        ),
+            (route) => false,
+      );
+    } else {
+      setState(() {
+        _errorMessage = result; // Show the error message if login failed
+      });
     }
   }
 
