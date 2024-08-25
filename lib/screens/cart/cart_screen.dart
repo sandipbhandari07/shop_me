@@ -24,7 +24,7 @@ class _HomescreenContentState extends State<CartScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            // Your UI components here...
+           
           ],
         ),
       ),
